@@ -1,0 +1,254 @@
+MainActivity.kt
+package com.example.listviewdinamico
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.enableEdgeToEdge
+import android.widget.ListView
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import android.widget.Toast.*
+import androidx.activity.compose.setContent
+import androidx.compose.material3.AlertDialog
+import com.example.listviewdinamico.R.*
+
+class MainActivity : ComponentActivity() {
+
+    private val listacomidas = arrayOf(
+        "Tom Yum Goong",
+        "Ceviche",
+        "Moussaka",
+        "Hangi",
+        "Sadza",
+        "Moules-frites",
+        "Biryani",
+        "Sauerbraten",
+        "Pastel de choclo",
+        "Smorrebrod"
+    )
+
+    private val listaimagenes= arrayOf(
+        R.drawable.tailandia,
+        R.drawable.peru,
+        R.drawable.grecia,
+        R.drawable.nuevazelanda,
+        R.drawable.zimbabue,
+        R.drawable.belgica,
+        R.drawable.pakistan,
+        R.drawable.alemania,
+        R.drawable.chile,
+        R.drawable.dinamarca
+    )
+
+    private lateinit var listView: ListView
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_main)
+        val listView = findViewById<ListView>(id.listView)
+            val itemsAdapter = ArrayAdapter(
+                this, android.R.layout.simple_list_item_1, listacomidas)
+            listView.adapter = itemsAdapter
+            listView.onItemClickListener=
+                AdapterView.OnItemClickListener { parent, view, position, id ->
+
+                val elemSelec = listacomidas[position]
+                val imagenSelec = listaimagenes[position]
+
+                    Toast.makeText(applicationContext, "Seleccionaste el platillo $elemSelec",
+                        Toast.LENGTH_SHORT).show()
+
+                }
+
+    }
+}
+
+
+activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView        //aquí empiezan las banderas
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="-60dp"
+        android:layout_marginTop="25dp"
+        android:id="@+id/comida1"
+        android:src="@drawable/tailandia"
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="-50dp"
+        android:layout_marginTop="78dp"
+        android:id="@+id/comida2"
+        android:src="@drawable/peru"
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="-50dp"
+        android:layout_marginTop="128dp"
+        android:id="@+id/comida3"
+        android:src="@drawable/grecia"
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="-50dp"
+        android:layout_marginTop="175dp"
+        android:id="@+id/comida4"
+        android:src="@drawable/nuevazelanda"
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="-50dp"
+        android:layout_marginTop="230dp"
+        android:id="@+id/comida5"
+        android:src="@drawable/zimbabue"
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="-50dp"
+        android:layout_marginTop="275dp"
+        android:id="@+id/comida6"
+        android:src="@drawable/belgica"
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="-50dp"
+        android:layout_marginTop="325dp"
+        android:id="@+id/comida7"
+        android:src="@drawable/pakistan"
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="-50dp"
+        android:layout_marginTop="375dp"
+        android:id="@+id/comida8"
+        android:src="@drawable/alemania"
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="-50dp"
+        android:layout_marginTop="425dp"
+        android:id="@+id/comida9"
+        android:src="@drawable/chile"
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="-50dp"
+        android:layout_marginTop="475dp"
+        android:id="@+id/comida10"
+        android:src="@drawable/dinamarca"
+        />
+
+</LinearLayout>
+
+LayoutPopUp para mostrar detallles
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/purple_500"
+    tools:context=".PopUp">
+
+    <ImageView
+        android:id="@+id/imagenplatillo1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/plato1"
+        android:layout_marginLeft="150dp"
+        />
+
+    <TextView
+        android:id="@+id/textouno"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Es una sopa tailandesa famosa por su sabor picante y agrio."
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        android:layout_marginLeft="-200dp"
+        android:layout_marginTop="-80dp"/>
+
+    <ImageView
+        android:id="@+id/imagenplatillo2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/plato2"
+        android:layout_marginLeft="150dp"
+        />
+
+    <TextView
+        android:id="@+id/textodos"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Es una mezcla de pescado fresco marinado en cítricos y con algunas guarniciones."
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        android:layout_marginLeft="-200dp"
+        android:layout_marginTop="-80dp"/>
+
+    <ImageView
+        android:id="@+id/imagenplatillo3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/plato3"
+        android:layout_marginLeft="150dp"
+        />
+
+    <TextView
+        android:id="@+id/textotres"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Este plato que tiene cierto parecido con la lasaña, pero utilizando capas de berenjena en lugar de pasta."
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        android:layout_marginLeft="-200dp"
+        android:layout_marginTop="-80dp"/>
+
+
+
+</LinearLayout>
